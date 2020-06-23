@@ -1,0 +1,587 @@
+{
+  "x-generator": "NSwag v12.3.1.0 (NJsonSchema v9.14.1.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "Biblioteca API",
+    "description": "API de Biblioteca",
+    "version": "v1"
+  },
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/customers": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Lista de clientes.",
+        "operationId": "Customer_GetAll",
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Clientes.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerAddressViewModel"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Criação de cliente.",
+        "operationId": "Customer_PostCustomer",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "body",
+            "required": true,
+            "description": "Parâmetro \"cliente\".",
+            "schema": {
+              "$ref": "#/definitions/CustomerViewModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": true,
+            "description": "Cliente criado.",
+            "schema": {
+              "$ref": "#/definitions/CustomerViewModel"
+            }
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customers/{id}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Cliente por Id.",
+        "operationId": "Customer_GetById",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int32",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Cliente.",
+            "schema": {
+              "$ref": "#/definitions/CustomerAddressViewModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Atualização de cliente.",
+        "operationId": "Customer_PutCustomer",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Parâmetro \"id\" do cliente.",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "name": "customer",
+            "in": "body",
+            "required": true,
+            "description": "Parâmetro \"cliente\".",
+            "schema": {
+              "$ref": "#/definitions/CustomerViewModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cliente atualizado."
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Exclusão de cliente.",
+        "operationId": "Customer_DeleteCustomer",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int32",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cliente excluido."
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customers/name/{name}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Cliente por nome.",
+        "operationId": "Customer_GetByName",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Cliente.",
+            "schema": {
+              "$ref": "#/definitions/CustomerAddressViewModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/v1/books": {
+      "get": {
+        "summary": "Buscar livros",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BookViewModel"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "operationId": "get-api-v1-books",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "q",
+            "description": "Palavra chave para realizar uma pesquisa textual"
+          }
+        ],
+        "security": []
+      }
+    },
+    "/api/v1/books/{bookId}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "bookId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Encontrar livro pelo ID da Open Library",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookViewModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "operationId": "get-api-v1-books-bookId",
+        "security": []
+      }
+    },
+    "/api/v1/books/{bookId}/rent": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "bookId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Alugar Livro",
+        "operationId": "post-api-v1-books-bookId-rent",
+        "responses": {
+          "202": {
+            "description": "Livro alugado."
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": ""
+      }
+    }
+  },
+  "definitions": {
+    "CustomerAddressViewModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "addressId",
+        "dateCreated"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "addressId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "cep": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/AddressViewModel"
+        }
+      }
+    },
+    "AddressViewModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cep": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "streetFull": {
+          "type": "string"
+        },
+        "uf": {
+          "type": "string"
+        }
+      },
+      "title": ""
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "extensions": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "CustomerViewModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "addressId",
+        "dateCreated"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "addressId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "address": {
+          "$ref": "#/definitions/AddressViewModel"
+        }
+      }
+    },
+    "BookViewModel": {
+      "title": "BookViewModel",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identificador da openlibrary"
+        },
+        "title": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "isbn13": {
+          "type": "string"
+        },
+        "isbn10": {
+          "type": "string"
+        },
+        "number_of_pages": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "description": "Token de autenticação via SSO",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "JWT": []
+    }
+  ]
+}
