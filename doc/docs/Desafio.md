@@ -1,10 +1,10 @@
 # Desafio
 
-O presente projeto foi criado com base no [template da Wiz Soluções](https://github.com/wizsolucoes/api-wiz-template) para construção de APIs
+O presente projeto foi criado com base no [template da Wiz Soluções](https://github.com/wizsolucoes/api-wiz-template) para auxiliar a execução do desafio de TDD.
 
-Dentro da pasta de Documentação temos uma especificação de API no formato OpenAPI v3, queremos uma API construída seguindo essa especificação..
+Dentro da pasta de Documentação temos uma especificação de API no formato OpenAPI v3, queremos uma API construída seguindo essa especificação.
 
-O projeto já implementa a parte do customers, mas a parte dos Books ainda não foi implementado.
+Esse projeto já implementa a parte do customers para auxiliar com exemplos de como realizar os testes e como implementar as tasks do desafio, mas a parte do Book ainda não foi implementado.
 
 Existem 3 rotas ainda por fazer.
 
@@ -38,6 +38,8 @@ Para realizar essa etapa existe um pdf no teams com os detalhes de como realizar
 
 ## Roteiro para o desenvolvimento
 
+Precisamos implementar 3 endpoints, sendo eles:
+
 - Listar livros
   - Modelar domínio do 'Listar livros'
   - Criar teste unitário para o 'Listar livros'
@@ -61,3 +63,5 @@ Para realizar essa etapa existe um pdf no teams com os detalhes de como realizar
   - Criar teste de integração para o 'Alugar livro para o usuário autenticado'
   - Criar teste de componente para o 'Alugar livro para o usuário autenticado'
   - Criar teste de contrato para o 'Alugar livro para o usuário autenticado'
+
+*Dica*: estamos querendo ver o trabalho em grupo. Então não tenham vergonha de usar o canal do chapter no Teams.
