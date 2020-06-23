@@ -333,3 +333,5 @@ ASALocalRun/
 # Removendo arquivos desnecessario para build
 code_coverage/
 *.info
+
+.gitignore
