@@ -1,61 +1,26 @@
 ﻿using Moq;
-using Moq.Protected;
 using RA;
 using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Net.Http;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using Wiz.Biblioteca.Domain.Models.Services;
-using Wiz.Biblioteca.Infra.Services;
-using Wiz.Biblioteca.Integration.Tests.Mocks;
+using System.Text;
 using Xunit;
 
-namespace Wiz.Biblioteca.Integration.Tests.Services
+namespace Wiz.Biblioteca.Contract.Tests.Consumer
 {
-    public class ViaCEPServiceTest
+    public class ViaCEPTest
     {
         private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
 
-        public ViaCEPServiceTest()
+        public ViaCEPTest()
         {
             _httpMessageHandlerMock = new Mock<HttpMessageHandler>();
-        }
-
-        [Fact]
-        public async Task GetByCEPAsync_ReturnViaCEPModelTestAsync()
-        {
-            var httpClientMock = "https://viacep.com.br/ws/";
-            var cep = "17052520";
-
-            _httpMessageHandlerMock.Protected().Setup<Task<HttpResponseMessage>>("SendAsync",
-                ItExpr.IsAny<HttpRequestMessage>(),
-                ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage()
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(JsonSerializer.Serialize(ViaCEPMock.ViaCEPModelFaker.Generate()))
-                });
-
-            var httpClient = new HttpClient(_httpMessageHandlerMock.Object)
-            {
-                BaseAddress = new Uri(httpClientMock)
-            };
-
-            var viaCEPservice = new ViaCEPService(httpClient);
-            var viaCEPMethod = await viaCEPservice.GetByCEPAsync(cep);
-
-            var serviceResult = Assert.IsType<ViaCEP>(viaCEPMethod);
-
-            Assert.NotNull(serviceResult);
-            Assert.NotNull(serviceResult.CEP);
         }
 
         [Theory]
         [InlineData("17052520")]
         [InlineData("17052-520")]
-        public void GetByCEPAsync_ReturnViaCEPModelTestAsync_RestAssured(string cep)
+        public void GetByCEPAsync_Functional_Test(string cep)
         {
             var httpClientMock = "https://viacep.com.br/ws/";
 
@@ -78,7 +43,7 @@ namespace Wiz.Biblioteca.Integration.Tests.Services
         [Theory]
         [InlineData("17052520")]
         [InlineData("17052-520")]
-        public void GetByCEPAsync_Test_Schema(string cep)
+        public void GetByCEPAsync_ResponseSchema_Test(string cep)
         {
             var httpClientMock = "https://viacep.com.br/ws/";
 
@@ -91,6 +56,7 @@ namespace Wiz.Biblioteca.Integration.Tests.Services
                  .Get($"{httpClientMock}{cep}/json/")
              .Then()
                  //.Debug()
+                 //https://jsonschema.net/ pode ajudar a criar o schema
                  .Schema(@"{
                     ""$schema"": ""http://json-schema.org/draft-07/schema"",
                     ""$id"": ""http://example.com/example.json"",
