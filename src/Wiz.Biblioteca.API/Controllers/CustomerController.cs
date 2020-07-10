@@ -26,6 +26,7 @@ namespace Wiz.Biblioteca.API.Controllers
         /// </summary>
         /// <returns>Clientes.</returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CustomerAddressViewModel>>> GetAll()
         {
             return Ok(await _customerService.GetAllAsync());
